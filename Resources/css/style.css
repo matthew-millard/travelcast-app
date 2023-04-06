@@ -1,0 +1,14 @@
+/* Custom properties */
+:root {
+    /* Color Palette */
+    --primary-blue-color: #00509D;
+    --primary-yellow-color: #FFD500;
+    --secondary-blue-color: #00296B;
+    --secondary-yellow-color: #FDC500;
+    --tertiary-blue-color: #003F88;
+    --primary-dark-shade: #000;
+    --primary-light-shade: #fff;
+    /* Fonts */
+    font-size: 62.5%;
+    font-family: 'Merriweather Sans', sans-serif;
+}
