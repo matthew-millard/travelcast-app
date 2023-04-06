@@ -12,3 +12,121 @@
     font-size: 62.5%;
     font-family: 'Merriweather Sans', sans-serif;
 }
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2.4rem;
+}
+
+h3 {
+    font-size: 2.1rem;
+}
+
+p,
+button,
+input,
+span,
+textarea {
+    font-size: 1.6rem;
+}
+
+/* Layout controls */
+.flex {
+    display: flex;
+}
+
+.page-container {
+    position: relative;
+    background-color: #003F88;
+    min-height: 100vh;
+    padding-bottom: 25px;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    background-color: var(--primary-blue-color);
+}
+
+.header__contents {
+    margin: 0 auto;
+    padding: 2rem;
+    width: 90%;
+    background-color: var(--primary-yellow-color);
+}
+
+.plane-icon {
+    transform: translateY(-4px) rotate(-30deg);
+    padding-left: 0.25rem;
+}
+
+
+
+/* Footer */
+.footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 25px;
+    width: 100%;
+    background-color: #FFD500;
+}
+
+
+
+
+
+
+
+/* Media Queries */
+
+/* x-small */
+@media only screen and (max-width: 576px) {
+
+}
+
+/* small */
+@media only screen and (min-width: 576px) {
+
+}
+
+/* medium */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* large */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* x-large */
+@media only screen and (min-width: 1200px) {
+
+    h1 {
+        font-size: 4.8rem;
+    }
+    
+    h2 {
+        font-size: 3.6rem;
+    }
+    
+    h3 {
+        font-size: 3rem;
+    }
+
+    .plane-icon {
+        transform: translateY(-6px) rotate(-30deg);
+        font-size: 2rem;
+        padding-left: 0.5rem;
+    }
+}
+
+/* xx-large */
+@media only screen and (min-width: 1400px) {
+
+}
