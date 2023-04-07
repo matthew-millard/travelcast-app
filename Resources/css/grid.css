@@ -1,0 +1,88 @@
+main {
+    background-color: aqua;
+}
+
+/* Search for a city */
+.city-search {
+    margin: 0 auto;
+    width: 90%;
+    background-color: blueviolet;
+    padding: 2rem 2rem 0;
+}
+
+.city-search form {
+    width: 100%;
+}
+
+.city-search form > * {
+    margin-bottom: 1rem;
+}
+
+.city-search form input {
+    border: none;
+    border-bottom: 2px solid var(--primary-dark-shade);
+    background: none;
+}
+
+.city-search form button {
+    display: block;
+}
+
+.city-search__search-history-title {
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+
+/* Current Weather Conditions */
+.current-weather-conditions {
+    background-color: yellow;
+}
+
+.current-weather-conditions__contents {
+    margin: 0 auto;
+    width: 90%;
+    padding: 2rem;
+    flex-direction: column;
+}
+
+
+
+.five-day-forecast {
+    background-color: violet;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+    max-width: 700px;
+}
+
+.five-day-forecast__title {
+    margin: 0 auto;
+    width: 90%;
+    padding: 2rem;
+}
+
+.five-day-forecast__contents {
+    margin: 0 auto;
+    width: 90%;
+    padding: 2rem;
+    border: 2px solid var(--primary-dark-shade);
+}
+
+.five-day-forecast__contents > * {
+    margin-bottom: 2rem;
+}
+
+.five-day-forecast__contents .day:last-child {
+    margin-bottom: 0;
+}
+
+.five-day-forecast__contents .day {
+    border: 2px solid var(--primary-dark-shade);
+    padding: 1rem;
+}
+
+.five-day-forecast__contents i {
+    display: block;
+}

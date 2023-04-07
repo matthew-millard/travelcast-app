@@ -8,6 +8,7 @@
     --tertiary-blue-color: #003F88;
     --primary-dark-shade: #000;
     --primary-light-shade: #fff;
+    --box-shadow: rgba(0, 0, 0, 0.3);
     /* Fonts */
     font-size: 62.5%;
     font-family: 'Merriweather Sans', sans-serif;
@@ -25,17 +26,48 @@ h3 {
     font-size: 2.1rem;
 }
 
+h4 {
+    font-size: 1.8rem;
+}
+
 p,
 button,
 input,
+ul,
+a,
+time,
+i,
 span,
 textarea {
     font-size: 1.6rem;
 }
 
+/* Button Styling */
+.button {
+    padding: 1rem 2.8rem;
+    color: var(--primary-light-shade);
+    letter-spacing: 0.1rem;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: var(--primary-blue-color);
+    box-shadow: 0 1px 2px 1px var(--box-shadow);
+}
+.button:hover,
+.button:active {
+    background-color: var(--tertiary-blue-color);
+}
+
+.button:active {
+    box-shadow: none;
+}
+
 /* Layout controls */
 .flex {
     display: flex;
+}
+
+.display-none {
+    display: none;
 }
 
 .page-container {
