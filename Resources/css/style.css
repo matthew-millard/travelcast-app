@@ -72,7 +72,7 @@ textarea {
 
 .page-container {
     position: relative;
-    background-color: #003F88;
+    /* background-color: #003F88; */
     min-height: 100vh;
     padding-bottom: 25px;
     flex-direction: column;
@@ -81,14 +81,14 @@ textarea {
 /* Header */
 .header {
     width: 100%;
-    background-color: var(--primary-blue-color);
+    /* background-color: var(--primary-blue-color); */
 }
 
 .header__contents {
     margin: 0 auto;
     padding: 2rem;
     width: 90%;
-    background-color: var(--primary-yellow-color);
+    /* background-color: var(--primary-yellow-color); */
 }
 
 .plane-icon {
@@ -105,7 +105,7 @@ textarea {
     right: 0;
     height: 25px;
     width: 100%;
-    background-color: #FFD500;
+    /* background-color: #FFD500; */
 }
 
 
@@ -123,17 +123,23 @@ textarea {
 
 /* small */
 @media only screen and (min-width: 576px) {
-
+    
 }
 
 /* medium */
 @media only screen and (min-width: 768px) {
-
+    
 }
 
 /* large */
 @media only screen and (min-width: 992px) {
+    .header {
+        margin-bottom: 6rem;
+    }
 
+    .header__contents {
+        max-width: 1440px;
+    }
 }
 
 /* x-large */
