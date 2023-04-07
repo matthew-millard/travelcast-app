@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./Resources/css/reset.css">
     <link rel="stylesheet" href="./Resources/css/style.css">
+    <link rel="stylesheet" href="./Resources/css/grid.css">
     <script src="./Resources/js/" defer></script>
     <title>TravelCast</title>
 </head>
@@ -23,9 +24,94 @@
                 <h3>Book your next adventure with confidence!</h3>
             </div>
         </header>
+
+
         <!-- Main Body -->
-        <main></main>
+        <main >
+            <!-- Search for a City -->
+            <aside class="city-search flex">
+                <form>
+                    <h4>Search for a City:</h4>
+                    <input type="text" name="city-search" id="city-search">
+                    <button type="submit" class="button">Search</button>
+                    <hr>
+                    <div class="">
+                        <div class="city-search__search-history-title flex"><span>Search History</span>
+                            <i class="fa-solid fa-plus"></i>
+                            <i class="fa-solid fa-minus display-none"></i>
+                        </div>
+                        <ul class="display-none">
+                            <li>append</li>
+                            <li>append</li>
+                            <li>append</li>
+                            <li>append</li>
+                            <li>append</li>
+                        </ul>
+                    </div>
+                </form>
+            </aside>
+
+            <!-- Current weather conditions -->
+            <section class="current-weather-conditions">
+                <div class="current-weather-conditions__contents flex">
+                    <h3>Vancouver<time>Current date</time><i>emoji</i></h3>
+                    <p>Temp:</p>
+                    <p>Wind:</p>
+                    <p>Humidity:</p>
+                </div>
+            </section>
+
+            <!-- 5 day forecast -->
+            <section class="five-day-forecast">
+                <div class="five-day-forecast__title">
+                    <h4>5-Day Forecast:</h4>
+                </div>
+                <div class="five-day-forecast__contents">
+                    <div class="five-day-forecast__day01 day">
+                        <time>19/05/23</time>
+                        <i>Insert emoji here</i>
+                        <p>Temp:</p>
+                        <p>Wind:</p>
+                        <p>Humidity</p>
+                    </div>
+
+                    <div class="five-day-forecast__day02 day">
+                        <time>19/05/23</time>
+                        <i>Insert emoji here</i>
+                        <p>Temp:</p>
+                        <p>Wind:</p>
+                        <p>Humidity</p>
+                    </div>
+
+                    <div class="five-day-forecast__day03 day">
+                        <time>19/05/23</time>
+                        <i>Insert emoji here</i>
+                        <p>Temp:</p>
+                        <p>Wind:</p>
+                        <p>Humidity</p>
+                    </div>
+
+                    <div class="five-day-forecast__day04 day">
+                        <time>19/05/23</time>
+                        <i>Insert emoji here</i>
+                        <p>Temp:</p>
+                        <p>Wind:</p>
+                        <p>Humidity</p>
+                    </div>
+
+                    <div class="five-day-forecast__day05 day">
+                        <time>19/05/23</time>
+                        <i>Insert emoji here</i>
+                        <p>Temp:</p>
+                        <p>Wind:</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+            </section>
+        </main>
         <!-- Footer -->
+
+        
         <footer class="footer">
         
         </footer>
