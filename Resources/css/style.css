@@ -61,6 +61,8 @@ textarea {
     box-shadow: none;
 }
 
+
+
 /* Layout controls */
 .flex {
     display: flex;
@@ -109,7 +111,19 @@ textarea {
 }
 
 
+/* Dynamically updated HTML */
 
+.search-history {
+    display: block;
+    margin: 1rem 0;
+    padding: 1rem 2rem;
+    background-color: var(--primary-yellow-color);
+    text-decoration: underline;
+}
+
+.search-history:hover {
+    background-color: var(--secondary-yellow-color);
+}
 
 
 
