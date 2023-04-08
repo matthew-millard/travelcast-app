@@ -40,6 +40,11 @@ main {
     justify-content: space-between;
 }
 
+.city-search__search-history-title:hover {
+    cursor: pointer;
+}
+
+
 
 
 
