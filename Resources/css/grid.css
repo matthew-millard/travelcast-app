@@ -62,6 +62,16 @@ main {
     flex-direction: column;
 }
 
+.current-weather-conditions__title {
+    width: 100%;
+    align-items: center;
+}
+
+.current-weather-conditions__title > * {
+    font-size: 3rem;
+    padding-right: 2rem;
+}
+
 
 
 .five-day-forecast {

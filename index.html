@@ -49,12 +49,17 @@
             </aside>
 
             <!-- Current weather conditions -->
-            <section class="current-weather-conditions">
+            <section class="current-weather-conditions" data-js="current-weather-container">
                 <div class="current-weather-conditions__contents flex">
-                    <h3>Vancouver<time>Current date</time><i>emoji</i></h3>
-                    <p>Temp:</p>
-                    <p>Wind:</p>
-                    <p>Humidity:</p>
+                    <div class="current-weather-conditions__title flex">
+                        <h3 data-js="current-city-name"></h3>
+                        <span data-js="current-date"></span>
+                        <i></i>
+                    </div>
+                    <p data-js="current-time"></p>
+                    <p data-js="current-temp"></p>
+                    <p data-js="current-wind"></p>
+                    <p data-js="current-humidity"></p>
                 </div>
             </section>
 
