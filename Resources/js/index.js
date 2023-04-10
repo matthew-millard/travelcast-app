@@ -7,11 +7,12 @@ var openWeatherKey = '1ed4313db2c7eabb04ea9a9f7ac7e55e'
 
 // API call for 5 day weather forecast
 function getFiveDayForecast(lat, lon) {
-	fiveDayForecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${openWeatherKey}`
+	fiveDayForecastURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exlude={current,minutely,hourly,alerts}&units=metric&appid=${openWeatherKey}`
 	fetch(fiveDayForecastURL)
 		.then(function (response) {
 			if (response.ok) {
 				response.json().then(function (data) {
+					renderFiveDayForcastData(data)
 					console.log(data)
 				})
 			} else {
@@ -23,13 +24,47 @@ function getFiveDayForecast(lat, lon) {
 		})
 }
 
+// Display five day forecast data
+function renderFiveDayForcastData(data) {
+	var forecastDayEl = Array.from(document.querySelectorAll('[data-js="forecast-day"]'))
+	var i = 1
+	forecastDayEl.forEach(day => {
+		var date = getDate(data, i)
+		var dateEl = day.querySelector('[data-js="forecast-date"]')
+		dateEl.innerHTML = `<b>${date}</b>`
+
+		var iconCode = data.daily[i].weather[0].icon
+		var iconAlt = data.daily[i].weather[0].description
+		var iconEl = day.querySelector('[data-js="forecast-icon"]')
+		iconEl.setAttribute('src', `https://openweathermap.org/img/wn/${iconCode}.png`)
+		iconEl.setAttribute('alt', `${iconAlt} icon.`)
+
+		var temperatureEl = day.querySelector('[data-js="forecast-temp"]')
+		temperatureEl.innerHTML = `Temp: <b>${Math.round(data.daily[i].temp.day)}&deg;C</b>`
+
+		var windEl = day.querySelector('[data-js="forecast-wind"]')
+		windEl.innerHTML = `Wind Speed: <b>${Math.round(data.daily[i].wind_speed)} m/s</b>`
+
+		var humidityEl = day.querySelector('[data-js="forecast-humidity"]')
+		humidityEl.innerHTML = `Humidity: <b>${data.daily[i].humidity}%</b>`
+
+		i++
+	})
+}
+
+// Get the date using timestamp
+function getDate(data, i) {
+	var timeStamp = data.daily[i].dt
+	var date = new Date(timeStamp * 1000)
+	return date.toLocaleDateString()
+}
+
 // API call to get the current weather conditions
 function getCurrentWeatherConditions(lat, lon) {
 	var currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${openWeatherKey}&units=metric`
 
 	fetch(currentWeatherURL).then(response => {
 		response.json().then(data => {
-			console.log(data)
 			var name = data.name
 			var temp = Math.round(data.main.temp)
 			var wind = Math.round(data.wind.speed)
@@ -42,7 +77,7 @@ function getCurrentWeatherConditions(lat, lon) {
 	})
 }
 
-// Display current weather details of searched location
+// Display current weather data
 function renderCurrentWeatherData(name, temp, wind, humid, iconCode) {
 	var cityEl = currentWeatherEl.querySelector('[data-js="current-city-name"]')
 	var temperatureEl = currentWeatherEl.querySelector('[data-js="current-temp"]')
@@ -62,7 +97,6 @@ function getCityTimeDate(lat, lon) {
 	// var timeStamp = Date.now() / 1000 // seconds since epoch
 	var targetDate = new Date()
 	var timeStamp = targetDate.getTime() / 1000 + targetDate.getTimezoneOffset() * 60
-	console.log(timeStamp)
 	var googleTimeZoneAPI = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lon}&timestamp=${timeStamp}&key=${apiKey}`
 
 	fetch(googleTimeZoneAPI)
@@ -111,8 +145,6 @@ var getCityCoordinates = function (cityName) {
 	fetch(geoCodingURL).then(response => {
 		if (response.ok) {
 			response.json().then(data => {
-				console.log(data)
-
 				var cityCoordinates = {
 					lon: data[0].lon,
 					lat: data[0].lat,
