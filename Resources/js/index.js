@@ -5,6 +5,25 @@ var historyListEl = searchForm.querySelector('[data-js="history-tab"]')
 var toggleAccordion = searchForm.querySelector('[data-js="search-history-title"]')
 var openWeatherKey = '1ed4313db2c7eabb04ea9a9f7ac7e55e'
 
+// API call for 5 day weather forecast
+function getFiveDayForecast(lat, lon) {
+	fiveDayForecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${openWeatherKey}`
+	fetch(fiveDayForecastURL)
+		.then(function (response) {
+			if (response.ok) {
+				response.json().then(function (data) {
+					console.log(data)
+				})
+			} else {
+				console.log(response.statusText)
+			}
+		})
+		.catch(function (error) {
+			console.error(error)
+		})
+}
+
+// API call to get the current weather conditions
 function getCurrentWeatherConditions(lat, lon) {
 	var currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${openWeatherKey}&units=metric`
 
@@ -15,17 +34,22 @@ function getCurrentWeatherConditions(lat, lon) {
 			var temp = Math.round(data.main.temp)
 			var wind = Math.round(data.wind.speed)
 			var humidity = Math.round(data.main.humidity)
+			var iconCode = data.weather[0].icon
 			getCityTimeDate(lat, lon)
-			renderCurrentWeatherData(name, temp, wind, humidity)
+			renderCurrentWeatherData(name, temp, wind, humidity, iconCode)
+			getFiveDayForecast(lat, lon)
 		})
 	})
 }
 
-function renderCurrentWeatherData(name, temp, wind, humid) {
+// Display current weather details of searched location
+function renderCurrentWeatherData(name, temp, wind, humid, iconCode) {
 	var cityEl = currentWeatherEl.querySelector('[data-js="current-city-name"]')
 	var temperatureEl = currentWeatherEl.querySelector('[data-js="current-temp"]')
 	var windSpeedEl = currentWeatherEl.querySelector('[data-js="current-wind"]')
 	var humidityEl = currentWeatherEl.querySelector('[data-js="current-humidity"]')
+	var weatherIconEl = currentWeatherEl.querySelector('[data-js="current-weather-icon"]')
+	weatherIconEl.setAttribute('src', `https://openweathermap.org/img/wn/${iconCode}.png`)
 	cityEl.textContent = `${name},`
 	temperatureEl.innerHTML = `Temp: <b>${temp} &deg;C</b>`
 	windSpeedEl.innerHTML = `Wind Speed: <b>${wind} m/s</b>`
@@ -109,6 +133,7 @@ var saveCityToStorage = function (cityName, cityCoordinates) {
 	localStorage.setItem(cityName, JSON.stringify(cityCoordinates))
 }
 
+// Create history tab
 var createHistoryTab = function (cityName) {
 	var searchHistory = document.createElement('a')
 	searchHistory.innerText = cityName
