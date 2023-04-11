@@ -1,6 +1,4 @@
-main {
-    /* background-color: aqua; */
-}
+
 
 /* Search for a city */
 .city-search {
@@ -31,6 +29,7 @@ main {
 }
 
 .city-search form button {
+    margin-top: 1rem;
     display: block;
 }
 
@@ -121,6 +120,12 @@ main {
 
 .five-day-forecast__contents i {
     display: block;
+}
+
+.error-message {
+    color: red;
+    padding: 1rem;
+    margin-bottom: 1rem;
 }
 
 
