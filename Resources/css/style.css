@@ -42,6 +42,10 @@ textarea {
     font-size: 1.6rem;
 }
 
+small {
+    font-size: 1.4rem;
+}
+
 /* Button Styling */
 .button {
     padding: 1rem 2.8rem;

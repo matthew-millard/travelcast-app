@@ -1,25 +1,30 @@
 var searchForm = document.querySelector('[data-js="search-form"]')
 var searchInput = searchForm.querySelector('[data-js="city-search"]')
 var currentWeatherEl = document.querySelector('[data-js="current-weather-container"]')
-var historyListEl = searchForm.querySelector('[data-js="history-tab"]')
 var toggleAccordion = searchForm.querySelector('[data-js="search-history-title"]')
+var historyListEl = searchForm.querySelector('[data-js="history-tab"]')
+var errorMessageEl = searchForm.querySelector('[data-js="error-message"]')
 var openWeatherKey = '1ed4313db2c7eabb04ea9a9f7ac7e55e'
+var prevSearchedCities = {}
+var prefixLocalStorage = 'TravelCast-Search-History'
+
+// Everytime the page loads, render all previously searched cities
+renderAllHistoryTabs()
 
 // API call for 5 day weather forecast
 function getFiveDayForecast(lat, lon) {
 	fiveDayForecastURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exlude={current,minutely,hourly,alerts}&units=metric&appid=${openWeatherKey}`
 	fetch(fiveDayForecastURL)
-		.then(function (response) {
+		.then(response => {
 			if (response.ok) {
 				response.json().then(function (data) {
 					renderFiveDayForcastData(data)
-					console.log(data)
 				})
 			} else {
 				console.log(response.statusText)
 			}
 		})
-		.catch(function (error) {
+		.catch(error => {
 			console.error(error)
 		})
 }
@@ -60,21 +65,30 @@ function getDate(data, i) {
 }
 
 // API call to get the current weather conditions
-function getCurrentWeatherConditions(lat, lon) {
+function getCurrentWeatherConditions(lat, lon, cityName) {
 	var currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${openWeatherKey}&units=metric`
 
-	fetch(currentWeatherURL).then(response => {
-		response.json().then(data => {
-			var name = data.name
-			var temp = Math.round(data.main.temp)
-			var wind = Math.round(data.wind.speed)
-			var humidity = Math.round(data.main.humidity)
-			var iconCode = data.weather[0].icon
-			getCityTimeDate(lat, lon)
-			renderCurrentWeatherData(name, temp, wind, humidity, iconCode)
-			getFiveDayForecast(lat, lon)
+	fetch(currentWeatherURL)
+		.then(response => {
+			if (response.ok) {
+				response.json().then(data => {
+					console.log(data)
+					var name = cityName
+					var temp = Math.round(data.main.temp)
+					var wind = Math.round(data.wind.speed)
+					var humidity = Math.round(data.main.humidity)
+					var iconCode = data.weather[0].icon
+					getCityTimeDate(lat, lon)
+					renderCurrentWeatherData(name, temp, wind, humidity, iconCode)
+					getFiveDayForecast(lat, lon)
+				})
+			} else {
+				console.log(response.statusText)
+			}
 		})
-	})
+		.catch(error => {
+			console.error(error)
+		})
 }
 
 // Display current weather data
@@ -94,7 +108,6 @@ function renderCurrentWeatherData(name, temp, wind, humid, iconCode) {
 // Get local time and date of location
 function getCityTimeDate(lat, lon) {
 	var apiKey = 'AIzaSyB9BGAUD5hAZHJILdxzLSWht4KXvHtA8NE'
-	// var timeStamp = Date.now() / 1000 // seconds since epoch
 	var targetDate = new Date()
 	var timeStamp = targetDate.getTime() / 1000 + targetDate.getTimezoneOffset() * 60
 	var googleTimeZoneAPI = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lon}&timestamp=${timeStamp}&key=${apiKey}`
@@ -118,12 +131,6 @@ function getCityTimeDate(lat, lon) {
 		})
 }
 
-// Get coordinates from local storage
-function getCoordinatesFromStorage() {}
-
-// Get list of city names from local storage
-function getCityNamesFromStorage() {}
-
 // Get the user's search input
 var searchCityHandler = function (event) {
 	event.preventDefault()
@@ -132,51 +139,94 @@ var searchCityHandler = function (event) {
 	searchInput.value = ''
 
 	if (!cityName) {
+		showErrorMessage()
 		return
 	} else {
+		clearErrorMessage()
 		getCityCoordinates(cityName)
 	}
 }
 
 // Call geocoding API and retrieve city coordinates
 var getCityCoordinates = function (cityName) {
-	var geoCodingURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=50&appid=${openWeatherKey}`
+	var geoCodingURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${openWeatherKey}`
 
-	fetch(geoCodingURL).then(response => {
-		if (response.ok) {
-			response.json().then(data => {
-				var cityCoordinates = {
-					lon: data[0].lon,
-					lat: data[0].lat,
-				}
-				getCurrentWeatherConditions(cityCoordinates.lat, cityCoordinates.lon)
-				saveCityToStorage(cityName, cityCoordinates)
-				createHistoryTab(cityName)
-				getCityNamesFromStorage()
-			})
-		} else {
-			console.log(response.statusText)
-		}
-	})
+	fetch(geoCodingURL)
+		.then(response => {
+			if (response.ok) {
+				response.json().then(data => {
+					console.log(data)
+					var cityCoordinates = {
+						lon: data[0].lon,
+						lat: data[0].lat,
+					}
+					getCurrentWeatherConditions(cityCoordinates.lat, cityCoordinates.lon, cityName)
+
+					var newCity = {
+						lat: cityCoordinates.lat,
+						lon: cityCoordinates.lon,
+					}
+
+					prevSearchedCities = loadFromStorage()
+					prevSearchedCities[cityName] = newCity
+					saveToStorage(prevSearchedCities)
+					clearHistory()
+					renderAllHistoryTabs()
+				})
+			} else {
+				console.log(response.statusText)
+			}
+		})
+		.catch(error => {
+			console.error(error)
+		})
 }
 
 // Save city coordinates to local storage
-var saveCityToStorage = function (cityName, cityCoordinates) {
-	localStorage.setItem(cityName, JSON.stringify(cityCoordinates))
+var saveToStorage = function (prevSearchedCities) {
+	localStorage.setItem(prefixLocalStorage, JSON.stringify(prevSearchedCities))
 }
 
-// Create history tab
-var createHistoryTab = function (cityName) {
-	var searchHistory = document.createElement('a')
-	searchHistory.innerText = cityName
-	searchHistory.classList.add('search-history')
-	historyListEl.appendChild(searchHistory)
+// load city coordinates from local storage
+function loadFromStorage() {
+	var cities = localStorage.getItem(prefixLocalStorage)
+	if (cities) {
+		return JSON.parse(cities)
+	} else {
+		return {}
+	}
 }
 
-// Search for a city event handler
+function clearHistory() {
+	historyListEl.innerHTML = ''
+}
+
+// render all history tabs
+function renderAllHistoryTabs() {
+	var history = loadFromStorage()
+	var historyArr = Object.entries(history)
+	historyArr.forEach(city => {
+		var tab = document.createElement('a')
+		tab.innerText = city[0]
+		tab.classList.add('search-history')
+		tab.setAttribute('city', city[0])
+		historyListEl.appendChild(tab)
+	})
+}
+
+function showErrorMessage() {
+	errorMessageEl.classList.add('error-message')
+	errorMessageEl.innerText = '* Please enter a city name.'
+}
+
+function clearErrorMessage() {
+	errorMessageEl.innerText = ''
+}
+
+// Search for a city - event handler
 searchForm.addEventListener('submit', searchCityHandler)
 
-// Search history accordion
+// Toggle search history accordion
 toggleAccordion.addEventListener('click', () => {
 	var historyTab = searchForm.querySelector('[data-js="history-tab"]')
 	var plusIndicator = searchForm.querySelector('.fa-plus')
@@ -184,4 +234,14 @@ toggleAccordion.addEventListener('click', () => {
 	historyTab.classList.toggle('display-none')
 	plusIndicator.classList.toggle('display-none')
 	minusIndicator.classList.toggle('display-none')
+})
+
+// History list event handler
+historyListEl.addEventListener('click', event => {
+	if (event.target.matches('a')) {
+		var cityName = event.target.getAttribute('city')
+		getCityCoordinates(cityName)
+	} else {
+		return
+	}
 })
