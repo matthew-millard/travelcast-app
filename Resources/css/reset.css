@@ -44,5 +44,5 @@ select {
 }
 
 hr {
-  border-bottom: 1px solid var(--primary-dark-shade);
+  border-bottom: 2px solid var(--primary-light-shade);
 }

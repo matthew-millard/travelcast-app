@@ -20,7 +20,7 @@
         <!-- Header -->
         <header class="header">
             <div class="header__contents">
-                <h1>TravelCast<span><i class="fa-solid fa-plane plane-icon"></i></span></h1>
+                <h1>Travel<span>Cast</span><span><i class="fa-solid fa-plane plane-icon"></i></span></h1>
                 <h3>Book your next adventure with confidence!</h3>
             </div>
         </header>
@@ -50,7 +50,7 @@
             </aside>
 
             <!-- Current weather conditions -->
-            <section class="current-weather-conditions" data-js="current-weather-container">
+            <section class="current-weather-conditions display-none" data-js="current-weather-container">
                 <div class="current-weather-conditions__contents flex">
                     <div class="current-weather-conditions__title flex">
                         <h3 data-js="current-city-name"></h3>
@@ -65,49 +65,59 @@
             </section>
 
             <!-- 5 day forecast -->
-            <section class="five-day-forecast">
+            <section class="five-day-forecast display-none" data-js="five-day-forecast-container">
                 <div class="five-day-forecast__title">
                     <h4>5-Day Forecast:</h4>
                 </div>
                 <div class="five-day-forecast__contents">
                     <div class="five-day-forecast__day01 day" data-js="forecast-day">
-                        <p data-js="forecast-date"></p>
-                        <img src="" data-js="forecast-icon">
-                        <p data-js="forecast-temp">Temp:</p>
-                        <p data-js="forecast-wind">Wind:</p>
-                        <p data-js="forecast-humidity">Humidity</p>
+                        <div class="five-day-forecast__data flex">
+                            <p data-js="forecast-date"></p>
+                            <img src="" data-js="forecast-icon">
+                            <p data-js="forecast-temp">Temp:</p>
+                            <p data-js="forecast-wind">Wind:</p>
+                            <p data-js="forecast-humidity">Humidity</p>
+                        </div>
                     </div>
 
                     <div class="five-day-forecast__day02 day" data-js="forecast-day">
-                        <p data-js="forecast-date"></p>
-                        <img src="" data-js="forecast-icon">
-                        <p data-js="forecast-temp">Temp:</p>
-                        <p data-js="forecast-wind">Wind:</p>
-                        <p data-js="forecast-humidity">Humidity</p>
+                        <div class="five-day-forecast__data flex">
+                            <p data-js="forecast-date"></p>
+                            <img src="" data-js="forecast-icon">
+                            <p data-js="forecast-temp">Temp:</p>
+                            <p data-js="forecast-wind">Wind:</p>
+                            <p data-js="forecast-humidity">Humidity</p>
+                        </div>
                     </div>
 
                     <div class="five-day-forecast__day03 day" data-js="forecast-day">
-                        <p data-js="forecast-date"></p>
-                        <img src="" data-js="forecast-icon">
-                        <p data-js="forecast-temp">Temp:</p>
-                        <p data-js="forecast-wind">Wind:</p>
-                        <p data-js="forecast-humidity">Humidity</p>
+                        <div class="five-day-forecast__data flex">
+                            <p data-js="forecast-date"></p>
+                            <img src="" data-js="forecast-icon">
+                            <p data-js="forecast-temp">Temp:</p>
+                            <p data-js="forecast-wind">Wind:</p>
+                            <p data-js="forecast-humidity">Humidity</p>
+                        </div>
                     </div>
 
                     <div class="five-day-forecast__day04 day" data-js="forecast-day">
-                        <p data-js="forecast-date"></p>
-                        <img src="" data-js="forecast-icon">
-                        <p data-js="forecast-temp">Temp:</p>
-                        <p data-js="forecast-wind">Wind:</p>
-                        <p data-js="forecast-humidity">Humidity</p>
+                        <div class="five-day-forecast__data flex">
+                            <p data-js="forecast-date"></p>
+                            <img src="" data-js="forecast-icon">
+                            <p data-js="forecast-temp">Temp:</p>
+                            <p data-js="forecast-wind">Wind:</p>
+                            <p data-js="forecast-humidity">Humidity</p>
+                        </div>
                     </div>
 
                     <div class="five-day-forecast__day05 day" data-js="forecast-day">
-                        <p data-js="forecast-date"></p>
-                        <img src="" data-js="forecast-icon">
-                        <p data-js="forecast-temp">Temp:</p>
-                        <p data-js="forecast-wind">Wind:</p>
-                        <p data-js="forecast-humidity">Humidity</p>
+                        <div class="five-day-forecast__data flex">
+                            <p data-js="forecast-date"></p>
+                            <img src="" data-js="forecast-icon">
+                            <p data-js="forecast-temp">Temp:</p>
+                            <p data-js="forecast-wind">Wind:</p>
+                            <p data-js="forecast-humidity">Humidity</p>
+                        </div>
                     </div>
                 </div>
             </section>
