@@ -53,6 +53,9 @@ function renderFiveDayForcastData(data) {
 		var humidityEl = day.querySelector('[data-js="forecast-humidity"]')
 		humidityEl.innerHTML = `Humidity: <b>${data.daily[i].humidity}%</b>`
 
+		var fiveDayForecastContainer = document.querySelector('[data-js="five-day-forecast-container"]')
+		fiveDayForecastContainer.classList.remove('display-none')
+
 		i++
 	})
 }
@@ -98,11 +101,13 @@ function renderCurrentWeatherData(name, temp, wind, humid, iconCode) {
 	var windSpeedEl = currentWeatherEl.querySelector('[data-js="current-wind"]')
 	var humidityEl = currentWeatherEl.querySelector('[data-js="current-humidity"]')
 	var weatherIconEl = currentWeatherEl.querySelector('[data-js="current-weather-icon"]')
+
 	weatherIconEl.setAttribute('src', `https://openweathermap.org/img/wn/${iconCode}.png`)
 	cityEl.textContent = `${name},`
 	temperatureEl.innerHTML = `Temp: <b>${temp} &deg;C</b>`
 	windSpeedEl.innerHTML = `Wind Speed: <b>${wind} m/s</b>`
 	humidityEl.innerHTML = `Humidity: <b>${humid}%</b>`
+	currentWeatherEl.classList.remove('display-none')
 }
 
 // Get local time and date of location
