@@ -138,6 +138,9 @@ small {
 .city-search form input {
     border: none;
     border-bottom: 2px solid var(--primary-yellow-color);
+    -webkit-appearance: none;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     color: var(--primary-light-shade);
     background: none;
     width: 90%;
