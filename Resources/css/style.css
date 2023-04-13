@@ -113,6 +113,8 @@ small {
 
 
 
+
+
 /* Search for a city */
 .city-search {
     margin: 0 auto 2rem;
@@ -161,6 +163,22 @@ small {
 
 .city-search hr {
     margin-bottom: 2rem;
+}
+
+/* Dynamically updated HTML */
+
+.search-history {
+    display: block;
+    margin: 1rem 0;
+    padding: 1rem 2rem;
+    color: var(--primary-blue-color);
+    border-radius: 1rem;
+    background-color: var(--primary-yellow-color);
+    text-decoration: underline;
+}
+
+.search-history:hover {
+    background-color: var(--secondary-yellow-color);
 }
 
 
@@ -285,21 +303,7 @@ small {
 }
 
 
-/* Dynamically updated HTML */
 
-.search-history {
-    display: block;
-    margin: 1rem 0;
-    padding: 1rem 2rem;
-    color: var(--primary-blue-color);
-    border-radius: 1rem;
-    background-color: var(--primary-yellow-color);
-    text-decoration: underline;
-}
-
-.search-history:hover {
-    background-color: var(--secondary-yellow-color);
-}
 
 
 
@@ -329,101 +333,117 @@ small {
 
 /* large */
 @media only screen and (min-width: 992px) {
+
     .header {
-        margin-bottom: 6rem;
+        margin-bottom: 4rem;
     }
-
     .header__contents {
-        max-width: 1440px;
-    }
-
-    main {
-        width: 100%;
-        max-width: 1440px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1fr 3fr;
-        grid-template-rows: 1fr 3fr;
-        grid-template-areas: 
-        'search current'
-        'search forecast';
-    }
-
-    .city-search {
-        margin: 0 auto;
-        grid-area: search;
-        width: 100%;
-    }
-
-    .current-weather-conditions {
-        grid-area: current;
-        justify-self: center;
+        width: 70%;
         max-width: none;
-        width: 80%;
-        
     }
 
-    .current-weather-conditions__contents {
-        display: block;
+    .header__contents h1 {
+        font-size: 6rem;
     }
-
-    .current-weather-conditions__contents,
-    .five-day-forecast__title {
-        margin-left: 0;
-        padding-left: 4rem;
-    }
-
-    .five-day-forecast {
-        grid-area: forecast;
-        height: 100%;
-    }
-
     
-    .five-day-forecast__contents {
-        /* background-color: aqua; */
-        width: 100%;
-        height: 90%;
-        padding:0;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
+    .header__contents span {
+        font-size: 6rem;
     }
-
-    .five-day-forecast__contents .day {
-        width: auto;
-        max-width: none;
-        padding: 2rem;
-    }
-
-    .five-day-forecast__contents > * {
-        margin-bottom: 0;
+    
+    .plane-icon {
+        font-size: 2rem;
+        transform: translateY(-7px) rotate(-35deg);
     }
 
 }
 
 /* x-large */
 @media only screen and (min-width: 1200px) {
-
-    h1 {
-        font-size: 4.8rem;
-    }
     
-    h2 {
-        font-size: 3.6rem;
-    }
-    
-    h3 {
-        font-size: 3rem;
+    .header__contents {
+        width: 90%;
     }
 
-    .plane-icon {
-        transform: translateY(-6px) rotate(-30deg);
-        font-size: 2rem;
-        padding-left: 0.5rem;
+    main {
+        width: 90%;
+        display: flex;
+        margin: 0 auto;
+        flex-wrap: wrap;
     }
+    
+    .city-search {
+        align-self: flex-start;
+        flex-basis: 30%;
+        flex-grow: 1;
+        
+    }
+
+    .current-weather-conditions {
+        margin-left: 5%;
+        flex-basis: 60%;
+        flex-grow: 1;
+        
+    }
+
+    .current-weather-conditions__contents {
+        flex-direction: column;
+        margin: 0;
+        width: 100%;
+        max-width: none;
+        padding: 0 2rem 2rem;
+    }
+
+    .five-day-forecast {
+        max-width: none;
+        width: none;
+        margin: 0;
+        flex-basis: 100%;
+        padding-bottom: 0;
+    }
+
+    .five-day-forecast__title {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    .five-day-forecast__contents {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+        width: 100%;
+        padding: 0rem;
+    }
+
+    .five-day-forecast__contents .day {
+        width: 200px;
+        max-width: 250px;
+    }
+
+    .five-day-forecast__contents > * {
+        margin-bottom: 0rem;
+        
+    }
+
+    .city-search ul {
+        height: 60px;
+        overflow: scroll;
+    }
+   
+    
+
 }
 
 /* xx-large */
 @media only screen and (min-width: 1400px) {
 
+    .header__contents {
+        width: 70%;
+    }
+    main {
+        width: 70%;
+    }
 }
+
+
+
