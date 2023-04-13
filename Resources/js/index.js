@@ -154,7 +154,7 @@ var searchCityHandler = function (event) {
 
 // Call geocoding API and retrieve city coordinates
 var getCityCoordinates = function (cityName) {
-	var geoCodingURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${openWeatherKey}`
+	var geoCodingURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${openWeatherKey}`
 
 	fetch(geoCodingURL)
 		.then(response => {
